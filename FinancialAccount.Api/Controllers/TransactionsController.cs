@@ -55,11 +55,11 @@ namespace FinancialAccount.Api.Controllers
             if (account == null)
                 return BadRequest("Account not found.");
 
-            // 1. Validate transaction type
+            //  Validate transaction type
             if (dto.TransactionType != "Deposit" && dto.TransactionType != "Withdrawal")
                 return BadRequest("Invalid transaction type. Must be 'Deposit' or 'Withdrawal'.");
 
-            // 2. Handle business logic
+            // Handle business logic
             if (dto.TransactionType == "Deposit")
             {
                 account.Balance += dto.Amount;
@@ -72,7 +72,7 @@ namespace FinancialAccount.Api.Controllers
                 account.Balance -= dto.Amount;
             }
 
-            // 3. Create transaction record
+            //  Create transaction record
             var transaction = new Transaction
             {
                 AccountId = dto.AccountId,
@@ -84,7 +84,7 @@ namespace FinancialAccount.Api.Controllers
             _db.Transactions.Add(transaction);
             await _db.SaveChangesAsync();
 
-            // 4. Return created transaction
+            // Return created transaction
             return CreatedAtAction(nameof(GetTransaction), new { id = transaction.Id }, new TransactionDTO
             {
                 Id = transaction.Id,
