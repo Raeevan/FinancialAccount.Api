@@ -1,10 +1,10 @@
 
 # 💰 Financial Account Management API
 
-A basic financial account management system built with ASP.NET Core Web API and Entity Framework Core. Includes full CRUD operations for Accounts and Transactions, plus LINQ-based financial reports.
+A basic Financial Account Management API built with ASP.NET Core Web API and Entity Framework Core. Includes full CRUD operations for Accounts and Transactions, along with LINQ-based financial reports.
 
 ## 🛠 Technologies
-- ASP.NET Core Web API
+- ASP.NET Core
 - Entity Framework Core (Code-First)
 - SQL Server
 - Swagger UI (for API testing)
@@ -12,14 +12,13 @@ A basic financial account management system built with ASP.NET Core Web API and 
 ## 🚀 Getting Started
 
 ### 📦 Installation
-
 1. Clone the repository:
    ```bash
    git clone https://github.com/Raeevan/FinancialAccountManagement.Api.git
    cd FinancialAccountManagement.Api
    ```
 
-2. Update your `appsettings.json`:
+2. Update `appsettings.json` with your local DB connection:
    ```json
    "ConnectionStrings": {
      "DefaultConnection": "Server=localhost;Database=FinancialDb;Trusted_Connection=True;TrustServerCertificate=True"
@@ -28,19 +27,20 @@ A basic financial account management system built with ASP.NET Core Web API and 
 
 3. Open Package Manager Console and run:
    ```powershell
-   Drop-Database         # optional: clean start
-   Update-Database       # apply migrations
+   Drop-Database         # optional, for a fresh start
+   Update-Database       # applies migrations
    ```
 
 4. Run the application:
-   ```bash
+   ```powershell
    dotnet run
    ```
 
-5. Open Swagger in your browser:
+5. Open your browser to:
    ```
    https://localhost:7049/swagger/index.html
    ```
+   to access the Swagger UI and test endpoints.
 
 ## 🔌 API Usage Guide
 
@@ -51,7 +51,7 @@ A basic financial account management system built with ASP.NET Core Web API and 
 - `PUT /api/accounts/{id}` – Update existing account
 - `DELETE /api/accounts/{id}` – Delete account
 
-Example JSON:
+Example JSON for creating an account:
 ```json
 {
   "accountNumber": "ACC-999",
@@ -63,11 +63,11 @@ Example JSON:
 ### 💸 Transaction Endpoints
 - `GET /api/transactions` – List all transactions
 - `GET /api/transactions/{id}` – Get transaction by ID
-- `POST /api/transactions` – Create a deposit or withdrawal
-- `PUT /api/transactions/{id}` – Update a transaction
-- `DELETE /api/transactions/{id}` – Delete a transaction
+- `POST /api/transactions` – Add a new transaction (Deposit or Withdrawal)
+- `PUT /api/transactions/{id}` – Update existing transaction
+- `DELETE /api/transactions/{id}` – Delete transaction
 
-Example JSON for POST:
+Example JSON for creating a transaction:
 ```json
 {
   "accountId": 1,
@@ -77,13 +77,13 @@ Example JSON for POST:
 ```
 
 ### 📊 Reports Endpoints
-- `GET /api/reports/transactions/by-account/{accountId}`
-- `GET /api/reports/accounts/total-balance`
-- `GET /api/reports/accounts/below-balance/{threshold}`
-- `GET /api/reports/accounts/top`
+- `GET /api/reports/transactions/by-account/{accountId}` – All transactions for an account
+- `GET /api/reports/accounts/total-balance` – Total balance of all accounts
+- `GET /api/reports/accounts/below-balance/{threshold}` – Accounts below threshold
+- `GET /api/reports/accounts/top` – Top 5 accounts by balance
 
 ## 📌 Notes
-- Database seeding inserts 20 predefined accounts and transactions.
-- To reseed, drop the database and restart the app.
-- All business logic (like balance updates on deposit/withdrawal) is handled automatically.
-- Swagger is available only in the Development environment.
+- Database seeding will insert 20 manual records for both accounts and transactions if tables are empty.
+- To reseed, drop the DB and run the app again.
+- Business logic automatically updates balances based on deposits/withdrawals.
+- For testing in Swagger, use seeded account IDs (1–20).
