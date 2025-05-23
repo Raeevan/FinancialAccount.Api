@@ -1,0 +1,6 @@
+@FinancialAccount.Api_HostAddress = http://localhost:7049
+
+GET {{ECommerceProductManagement.Api_HostAddress}}/api/accounts
+Accept: application/json
+
+###
